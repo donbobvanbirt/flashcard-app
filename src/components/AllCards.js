@@ -19,7 +19,7 @@ export default class AllCards extends Component {
   }
 
   componentWillMount() {
-    let { id } = this.props.params;
+    // let { id } = this.props.params;
     CardActions.getAll();
     FlashCardStore.startListening(this._onChange);
   }
@@ -95,7 +95,7 @@ export default class AllCards extends Component {
 
               <td><input ref="editAnswer" type="text" defaultValue={card.answer}/></td>
 
-              <td><input ref="editSubject" type="text" defaultValue={card.question}/></td>
+              <td><input ref="editSubject" type="text" defaultValue={card.subject}/></td>
 
               <td><button onClick={() => this._saveEdit(card.id)} className="btn btn-success"><span className="glyphicon glyphicon-ok-circle"></span></button></td>
               <td><button onClick={() => this._removeCard(card.id)} className="btn btn-danger"><span className="glyphicon glyphicon-trash"></span></button></td>

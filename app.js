@@ -85,6 +85,11 @@ app.put('/flashcard/:id', (req, res) => {
   })
 })
 
+app.use("*", function(request, response) {
+	//send the index.html
+    response.sendFile(path.join(__dirname, "./build/index.html"));
+});
+
 app.listen(PORT, err => {
   console.log(err || `Express listening on ${PORT}`);
 })
