@@ -100,7 +100,7 @@ export default class Test extends Component {
     console.log('card.Answer', cardAnswer)
 
     return (
-      <div>
+      <div className="text-center">
         <h3>{cardQuestion}</h3>
         <h3>{cardAnswer}</h3>
         <button onClick={this._getCard} disabled={!cardActive} className="btn btn-success">Show Answer</button>
