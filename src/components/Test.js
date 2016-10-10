@@ -39,7 +39,7 @@ export default class Test extends Component {
       answerResult: TestStore.getResult(),
       subjects: FlashCardStore.getSubjects()
     })
-    console.log('this.state', this.state)
+    // console.log('this.state', this.state)
   }
 
   _getCard() {
@@ -57,8 +57,7 @@ export default class Test extends Component {
     e.preventDefault();
 
     this.setState({
-      cardActive: true,
-      answerResult: ''
+      cardActive: true
     })
 
     let { selectedSubs } = this.state;
@@ -70,7 +69,6 @@ export default class Test extends Component {
         path += `subject=${sub}`;
       })
     }
-    console.log('path', path);
     CardActions.getCard(path);
   }
 
@@ -85,7 +83,7 @@ export default class Test extends Component {
     this.setState({
       selectedSubs
     })
-    console.log('this.state', this.state)
+    // console.log('this.state', this.state)
   }
 
   _checkAnswer() {
@@ -113,7 +111,7 @@ export default class Test extends Component {
     }
 
 
-    console.log('card.Answer', cardAnswer)
+    // console.log('card.Answer', cardAnswer)
 
     return (
       <div className="text-center">
@@ -121,13 +119,13 @@ export default class Test extends Component {
         <h3>{cardAnswer}</h3>
         <button onClick={this._getCard} disabled={!cardActive} className="btn btn-success">Show Answer</button>
         <br/>
-        <input ref="answer" type="text"/>
+        <input ref="answer" disabled={!cardActive} type="text"/>
         <button onClick={this._checkAnswer} disabled={!cardActive} className="btn btn-default">Check</button>
         <h3>{answerResult}</h3>
         <hr/>
         <form onSubmit={this._getRandomCard}>
 
-          <button disabled={cardActive} className="btn btn-primary"><span className="glyphicon glyphicon-random"></span></button>
+          <button disabled={cardActive} className="btn btn-primary">New Card</button>
           <div>
             {subjects.map((sub, i) => {
               if(subjects[i-1] !== sub) {

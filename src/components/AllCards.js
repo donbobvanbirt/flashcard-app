@@ -51,7 +51,7 @@ export default class AllCards extends Component {
   }
 
   _removeCard(cardId) {
-    console.log('cardId', cardId);
+    // console.log('cardId', cardId);
     CardActions.removeCard(cardId);
   }
 
@@ -140,15 +140,15 @@ export default class AllCards extends Component {
         <form onSubmit={this._addNew} className="form-inline">
           <div className="form-group">
             <label htmlFor="question">Question:</label>
-            <input ref="question" className="form-control" type="text"/>
+            <input ref="question" className="form-control" type="text" required/>
           </div>
           <div className="form-group">
             <label htmlFor="answer">Answer:</label>
-            <input ref="answer" className="form-control" type="text"/>
+            <input ref="answer" className="form-control" type="text" required/>
           </div>
           <div className="form-group">
             <label htmlFor="subject">Subject</label>
-            <input ref="subject" className="form-control" type="text"/>
+            <input ref="subject" className="form-control" type="text" required/>
           </div>
           <button className="btn btn-primary">Add Flashcard</button>
         </form>

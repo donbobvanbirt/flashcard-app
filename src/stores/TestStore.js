@@ -12,7 +12,8 @@ class TestStore extends EventEmitter {
       switch (action.type) {
         case 'RECEIVE_RAND_CARD':
           _card = action.payload.data;
-          console.log('_card', _card)
+          _answerResults = '';
+          // console.log('_card', _card)
           this.emit('CHANGE');
           break;
         case 'CHECK_ANSWER':

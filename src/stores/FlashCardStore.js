@@ -13,7 +13,7 @@ class FlashCardStore extends EventEmitter {
         case 'RECEIVE_ALL_CARDS':
         _cards = action.payload.data;
         _subjects = _cards.map(card => { return card.subject }).sort();
-        console.log('_cards', _cards)
+        // console.log('_cards', _cards)
         this.emit('CHANGE');
         break;
 

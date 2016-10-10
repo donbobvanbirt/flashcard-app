@@ -51,7 +51,7 @@ const API = {
   },
 
   getCard(id) {
-    console.log('id', id);
+    // console.log('id', id);
     get(`/flashcard/${id}`)
     .then(res => {
       let data = res.data;
