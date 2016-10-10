@@ -10,31 +10,27 @@ export default class Layout extends Component {
   }
 
   render() {
+    let path = this.props.location.pathname;
+
 
     return (
       <div className='container'>
-        <nav className="navbar navbar-default">
 
-          <div className="navbar-header">
-            {/* <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span className="sr-only">Toggle navigation</span>
+        <ul className="nav nav-tabs">
+          <li role="presentation" className={classNames({active: path === '/'})}><Link to ='/'>Flashcards</Link></li>
 
-              </button> */}
-              <div className="navbar-brand"><Link to ='/'>Flashcards</Link></div>
-              <div className="navbar-brand"><Link to ='/test'>Test Your Knowledge</Link></div>
-            </div>
-            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul className="nav navbar-nav">
-                {/* <li role="presentation" className={classNames({active: path === '/favorites'})}><Link to ='/favorites'>Favorites</Link></li> */}
-              </ul>
-            </div>
-
-          </nav>
-
-          <div className='center'>
-            {this.props.children}
-          </div>
+          <li role="presentation" className={classNames({active: path === '/test'})}><Link to ='/test'>Test Your Knowledge</Link></li>
+        </ul>
+        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul className="nav navbar-nav">
+          </ul>
         </div>
-      )
-    }
+
+        <div className='center'>
+          {this.props.children}
+        </div>
+        
+      </div>
+    )
   }
+}
