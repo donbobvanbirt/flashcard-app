@@ -10,9 +10,16 @@ const ServerActions ={
   },
 
   receiveRandCard(data) {
-    console.log('data in ServerActions:', data);
+    // console.log('data in ServerActions:', data);
     AppDispatcher.dispatch({
       type:'RECEIVE_RAND_CARD',
+      payload: { data }
+    })
+  },
+
+  checkAnswer(data) {
+    AppDispatcher.dispatch({
+      type:'CHECK_ANSWER',
       payload: { data }
     })
   }

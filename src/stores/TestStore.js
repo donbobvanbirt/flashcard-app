@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import AppDispatcher from '../AppDispatcher'
 
 let _card = null;
+let _answerResults = '';
 
 class TestStore extends EventEmitter {
   constructor() {
@@ -10,12 +11,14 @@ class TestStore extends EventEmitter {
     AppDispatcher.register(action => {
       switch (action.type) {
         case 'RECEIVE_RAND_CARD':
-        _card = action.payload.data;
-        console.log('_card', _card)
-        this.emit('CHANGE');
-        break;
-
-
+          _card = action.payload.data;
+          console.log('_card', _card)
+          this.emit('CHANGE');
+          break;
+        case 'CHECK_ANSWER':
+          _answerResults = action.payload.data;
+          this.emit('CHANGE');
+          break;
       }
     })
   }
@@ -30,6 +33,10 @@ class TestStore extends EventEmitter {
 
   getCard() {
     return _card;
+  }
+
+  getResult() {
+    return _answerResults;
   }
 }
 

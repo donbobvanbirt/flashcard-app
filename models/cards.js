@@ -59,6 +59,7 @@ exports.getById = function(id, cb) {
     if (specificCard.length) {
       specificCard = specificCard[0]
     }
+    // console.log('specificCard', specificCard)
     return cb(null, specificCard)
   })
 }
@@ -66,7 +67,7 @@ exports.getById = function(id, cb) {
 exports.checkAnswer = function(id, answer, cb) {
   exports.getById(id, (err, card) => {
     if(err) return cb(err);
-    if(card[0].answer === answer) {
+    if(card.answer === answer) {
       cb(null, 'CORRECT!!')
     } else {
       cb(null, 'WRONG!')

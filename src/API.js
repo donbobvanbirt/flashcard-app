@@ -55,10 +55,20 @@ const API = {
     get(`/flashcard/${id}`)
     .then(res => {
       let data = res.data;
-      console.log('data in API:', data);
+      // console.log('data in API:', data);
       ServerActions.receiveRandCard(data);
       // console.log(data);
 
+    })
+    .catch(console.error);
+  },
+
+  checkAnswer(answer, id) {
+    get(`/answer/${id}/${answer}`)
+    .then(res => {
+      let data = res.data;
+      // console.log('data in API:', data);
+      ServerActions.checkAnswer(data);
     })
     .catch(console.error);
   }

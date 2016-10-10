@@ -11,6 +11,7 @@ export default class Test extends Component {
     this.state = {
       card: TestStore.getCard(),
       subjects: FlashCardStore.getSubjects() || [],
+      answerResult: TestStore.getResult(),
       selectedSubs: [],
       cardActive: false
     }
@@ -18,6 +19,7 @@ export default class Test extends Component {
     this._getCard = this._getCard.bind(this);
     this._boxChecked = this._boxChecked.bind(this);
     this._getRandomCard = this._getRandomCard.bind(this);
+    this._checkAnswer = this._checkAnswer.bind(this);
   }
 
   componentWillMount() {
@@ -34,6 +36,7 @@ export default class Test extends Component {
   _onChange() {
     this.setState({
       card: TestStore.getCard(),
+      answerResult: TestStore.getResult(),
       subjects: FlashCardStore.getSubjects()
     })
     console.log('this.state', this.state)
@@ -54,7 +57,8 @@ export default class Test extends Component {
     e.preventDefault();
 
     this.setState({
-      cardActive: true
+      cardActive: true,
+      answerResult: ''
     })
 
     let { selectedSubs } = this.state;
@@ -84,8 +88,20 @@ export default class Test extends Component {
     console.log('this.state', this.state)
   }
 
+  _checkAnswer() {
+    let id = '';
+    let { answer } = this.refs;
+    if(this.state.card) {
+      id = this.state.card.id;
+    }
+    // console.log('checkAnswer, id:', answer.value, id);
+    if(answer.value) {
+      CardActions.checkAnswer(answer.value, id);
+    }
+  }
+
   render() {
-    let { card, subjects, cardActive } = this.state;
+    let { card, subjects, cardActive, answerResult } = this.state;
     let cardQuestion, cardAnswer, cardId, checkboxes = '';
 
     if (card) {
@@ -104,6 +120,10 @@ export default class Test extends Component {
         <h3>{cardQuestion}</h3>
         <h3>{cardAnswer}</h3>
         <button onClick={this._getCard} disabled={!cardActive} className="btn btn-success">Show Answer</button>
+        <br/>
+        <input ref="answer" type="text"/>
+        <button onClick={this._checkAnswer} disabled={!cardActive} className="btn btn-default">Check</button>
+        <h3>{answerResult}</h3>
         <hr/>
         <form onSubmit={this._getRandomCard}>
 
@@ -112,8 +132,8 @@ export default class Test extends Component {
             {subjects.map((sub, i) => {
               if(subjects[i-1] !== sub) {
                 return (
-                  <div className="checkbox">
-                    <label key={i}><input type="checkbox" onChange={() => this._boxChecked(sub)} value={sub}/>{sub}</label>
+                  <div key={i} className="checkbox">
+                    <label><input type="checkbox" onChange={() => this._boxChecked(sub)} value={sub}/>{sub}</label>
                   </div>
                 )
               }

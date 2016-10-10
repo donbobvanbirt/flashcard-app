@@ -19,6 +19,10 @@ const CardActions = {
 
   getCard(id) {
     API.getCard(id);
+  },
+
+  checkAnswer(answer, id) {
+    API.checkAnswer(answer, id);
   }
 }
 
